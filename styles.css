@@ -1,0 +1,433 @@
+/* ===== CSS Variables (Light / Dark) ===== */
+:root {
+  --bg: #f8f9fa;
+  --bg-section: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #5a5a5a;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --border: #e5e7eb;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --header-bg: rgba(255, 255, 255, 0.9);
+  --footer-text: #6b7280;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1419;
+  --bg-section: #1a1f26;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-hover: #79b8ff;
+  --border: #30363d;
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --header-bg: rgba(15, 20, 25, 0.95);
+  --footer-text: #8b949e;
+}
+
+/* ===== Reset & Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+  font-size: clamp(0.9375rem, 2vw, 1rem);
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  min-height: 100vh;
+}
+
+/* ===== Layout ===== */
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2rem);
+}
+
+/* ===== Header ===== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 4vw, 2rem);
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--text);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-section);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--border);
+}
+
+.theme-icon {
+  display: none;
+  font-size: 1.25rem;
+}
+
+/* 라이트 모드: 달 아이콘(클릭 시 다크로) */
+html:not([data-theme]) .theme-icon.moon,
+html[data-theme="light"] .theme-icon.moon {
+  display: inline;
+}
+
+/* 다크 모드: 해 아이콘(클릭 시 라이트로) */
+html[data-theme="dark"] .theme-icon.sun {
+  display: inline;
+}
+
+/* ===== Sections 공통 ===== */
+section {
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+  background: var(--bg);
+}
+
+section:nth-child(even) {
+  background: var(--bg-section);
+}
+
+.section-title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ===== Hero ===== */
+.hero {
+  min-height: clamp(200px, 40vw, 280px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-name {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.hero-birth {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.hero-text {
+  margin: 0;
+  font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .hero-text {
+    white-space: normal;
+    text-align: center;
+  }
+}
+
+/* ===== Intro ===== */
+.intro-content p {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+
+.intro-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== Tech Stack ===== */
+.tech-lead {
+  margin: 0 0 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tech-card {
+  flex: 1 1 min(100%, 140px);
+  max-width: 180px;
+  padding: 1.25rem 1rem;
+  background: var(--bg-section);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.tech-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+}
+
+[data-theme="dark"] .tech-card:hover {
+  box-shadow: 0 4px 12px rgba(88, 166, 255, 0.15);
+}
+
+.tech-card .tech-icon {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.tech-card .tech-name {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ===== Projects ===== */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-card {
+  padding: 1.5rem;
+  background: var(--bg-section);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
+}
+
+[data-theme="dark"] .project-card:hover {
+  box-shadow: 0 4px 16px rgba(88, 166, 255, 0.12);
+}
+
+.project-card.in-progress {
+  opacity: 0.92;
+  background: var(--bg);
+  border-style: dashed;
+}
+
+.project-card.in-progress:hover {
+  opacity: 1;
+}
+
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.project-title {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.project-badge {
+  flex-shrink: 0;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--accent);
+  background: rgba(37, 99, 235, 0.12);
+  border-radius: 6px;
+}
+
+[data-theme="dark"] .project-badge {
+  background: rgba(88, 166, 255, 0.15);
+}
+
+.project-description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.project-tech {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  color: #fff;
+}
+
+.btn-secondary {
+  background: var(--bg-section);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.project-card .btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.project-card .btn-primary {
+  flex: 1;
+  min-width: 100px;
+}
+
+.project-card .btn-secondary {
+  flex: 0 1 auto;
+}
+
+/* ===== GitHub & Contact sections ===== */
+.github-section .container,
+.contact .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* ===== Footer ===== */
+.footer {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border);
+  background: var(--bg-section);
+}
+
+.footer-text {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--footer-text);
+  text-align: center;
+}
+
+/* ===== Responsive: 작은 모바일 ===== */
+@media (max-width: 360px) {
+  .tech-list {
+    flex-direction: column;
+  }
+
+  .tech-card {
+    max-width: none;
+  }
+
+  .project-links {
+    flex-direction: column;
+  }
+
+  .project-card .btn {
+    width: 100%;
+  }
+}
+
+/* ===== Responsive: 태블릿 이상 ===== */
+@media (min-width: 600px) {
+  .hero-text {
+    font-size: 1.375rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
